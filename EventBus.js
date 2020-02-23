@@ -54,16 +54,16 @@ export class EventBus {
   /**
    * 发射事件
    * @param {string} name 事件名称
-   * @param {any} data 
+   * @param {any} payload 
    */
-  emit(name, data) {
+  emit(name, payload) {
     const events = this._events
 
     for (const i in events) {
       if (name === events[i].name) {
         const funcs = events[i].executes
         funcs.forEach((item, i) => {
-          item.execute(data)
+          item.execute(payload)
         })
         return this
       }

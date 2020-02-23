@@ -1,3 +1,3 @@
 export default {
-  UPDATE_USERNAME: 'UPDATE_USERNAME',
+  UPDATE_TOKEN: 'UPDATE_TOKEN',
 }
