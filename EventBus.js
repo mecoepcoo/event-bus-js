@@ -2,6 +2,11 @@ export class EventBus {
   _events = []
 
   _uidCount = 0
+
+  get events() {
+    return _events
+  }
+
   /**
    * 注册/订阅事件
    * @param {string} name 事件名
