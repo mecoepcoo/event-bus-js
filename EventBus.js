@@ -4,7 +4,7 @@ export class EventBus {
   _uidCount = 0
 
   get events() {
-    return _events
+    return this._events
   }
 
   /**
@@ -34,6 +34,19 @@ export class EventBus {
     return eventId
   }
   /**
+   * 注册事件，触发一次后移除
+   * @param {string} name 事件名
+   * @param {function} execute 执行函数
+   */
+  registerOnce(name, execute) {
+    const _this = this
+    const eventId = this.register(name, handler)
+    function handler() {
+      _this.unregister(name, eventId)
+      execute.apply(null, arguments)
+    }
+  }
+  /**
    * 退订事件
    * @param {string} name 事件名称
    * @param {number} eventId 事件id
@@ -55,6 +68,12 @@ export class EventBus {
       }
     }
     return this
+  }
+  /**
+   * 退订全部事件
+   */
+  unregisterAll() {
+    this._events = []
   }
   /**
    * 发射事件
@@ -91,5 +110,4 @@ export class EventBus {
     this._uidCount++
     return this._uidCount
   }
-
 }
